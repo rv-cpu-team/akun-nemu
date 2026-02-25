@@ -1,0 +1,67 @@
+mainmenu "RISC-V NPC Simulator Configuration"
+
+menu "Memory/RAM"
+config MBASE
+    hex "Memory Base Address"
+    default 0x80000000
+
+config MSIZE
+    hex "Memory Size"
+    default 0x8000000
+
+config PC_RESET_OFFSET
+    hex "PC Reset Offset"
+    default 0x0
+config MEM_RANDOM
+    bool "Memory init with random values"
+    default y
+endmenu
+
+menu "MMIO"
+
+config UART_MMIO
+    hex "UART Address"
+    default 0x0000000010000005
+endmenu
+
+menu "Debug"
+config DIFFTEST
+    bool "open difftest"
+    default y
+config NPC_OPEN_SIM
+    bool "open waveform"
+    default y
+config INSTR_TRACE_START
+    int  "instr trace start"
+    default 0
+config DPI_MEM_DEBUG
+    bool "[DPI] mem debug"
+    default n
+
+config DIFFTEST_MMIO_DEBUG
+    bool "[DIFFTEST] mmio debug"
+    default n
+endmenu
+
+menu "Trace"
+config TRACE
+    bool "Global Trace Enable"
+    default y
+
+config TRACE_LOG
+    bool "Enable Full Instruction Log"
+    depends on TRACE
+    default y
+
+config TRACE_SPECIAL
+    bool "special instr trace"
+    depends on TRACE
+    default y
+
+config ITRACE
+    bool "itrace"
+    depends on TRACE
+    default y
+endmenu
+
+

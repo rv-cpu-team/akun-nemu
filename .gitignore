@@ -1,0 +1,9 @@
+*~
+_*
+*.json
+include/generated
+include/config
+build
+log/*.txt
+.cache
+repo
