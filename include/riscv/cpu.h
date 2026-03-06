@@ -9,6 +9,7 @@ typedef struct {
   reg_t gpr[GPR_NUM];
   reg_t pc;
   reg_t csr[CSR_NUM];
+  reg_t  mode;
 } CPU_state;
 
 

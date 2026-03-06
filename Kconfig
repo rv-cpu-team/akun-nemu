@@ -17,12 +17,7 @@ config MEM_RANDOM
     default y
 endmenu
 
-menu "MMIO"
 
-config UART_MMIO
-    hex "UART Address"
-    default 0x0000000010000005
-endmenu
 
 menu "Debug"
 config DIFFTEST
@@ -65,3 +60,14 @@ config ITRACE
 endmenu
 
 
+menuconfig DEVICE
+    bool "device"  # 这里的 bool 就是让菜单项带开关
+    default y      # 默认开启，可按需改为 n
+
+if DEVICE  # 只有 DEVICE 开启时，下面的配置才可见
+
+config UART_MMIO
+    hex "UART Address"
+    default 0x0000000010000005
+
+endif  # DEVICE

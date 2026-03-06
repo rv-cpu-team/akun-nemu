@@ -27,22 +27,7 @@
 #define op_fence       0b0001111
 #define op_amo         0b0101111
 
-
-#define func3000 0b000
-#define func3001 0b001
-#define func3010 0b010
-
-#define inst_ecall      0x00000073
-#define inst_ebreak     0x00100073
-#define inst_uret       0x00200073
-#define inst_sret       0x10200073
-#define inst_mret       0x30200073
-#define inst_wfi        0x10500073
-#define inst_fence_i    0x0000100f
-
 //special instr
-
-
 typedef struct decode_t{
   reg_t  pc;
   reg_t  snpc;

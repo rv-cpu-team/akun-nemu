@@ -1,19 +1,25 @@
 #include <defs.h>   //api
 #include <common.h>
 
-static const char *img_file = "/home/akun/riscv64-cpu/simulator/bin/xv6-kernel.bin";
+//九哥发来的xv6-kernel, spike能启动， spike pk不能启动
+// static const char *img_file = "/home/akun/akun-nemu/bin/new-kernel.bin";
+
+//我自己构建的xv6-kernel
+//static const char *img_file = "/home/akun/akun-nemu/bin/xv6-kernel.bin";
+
+//我自己构建的xv6-kernel（修改了entry)
+static const char *img_file = "/home/akun/xv6-rv/bin/xv6-kernel.bin";
+
 //static char *img_file = NULL;
 static char *log_file = NULL;
 static char *diff_so_file = NULL;
 static int   difftest_port = 1234;
-
 
 static void welcome() {
   Log("Build time: %s, %s", __TIME__, __DATE__);
   printf("Welcome to %s-npc!\n", ANSI_FMT(str(__GUEST_ISA__), ANSI_FG_YELLOW ANSI_BG_RED));
   printf("For help, type \"help\"\n");
 }
-
 
 static long load_img() {
   if (img_file == NULL) {

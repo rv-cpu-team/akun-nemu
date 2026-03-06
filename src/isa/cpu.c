@@ -5,8 +5,6 @@ CPU_state cpu;
 u64 *reg_ptr = NULL;
 u64 *csr_ptr = NULL;
 
-
-
 const char *regs[] = {
   "$0", "ra", "sp",  "gp",  "tp", "t0", "t1", "t2",
   "s0", "s1", "a0",  "a1",  "a2", "a3", "a4", "a5",
@@ -27,23 +25,34 @@ const char* reg_name(int idx) {
   return regs[check_reg_idx(idx)];
 }
 
-
 void init_cpu(){
-  cpu.pc = 0x80000000;
+  cpu.pc = 0x80000000ULL;
   for(int i = 0; i < 32; ++i){
     cpu.gpr[i] = 0;
   }
   for(int i = 0; i < 4096; ++i){
     cpu.csr[i] = 0;
   }
+
+  //spike init value
+  cpu.csr[mhartid]    =  0x0000000000000000;
+  cpu.csr[mstatus]    =  0x0000000a00000000; 
+  cpu.csr[mepc]       =  0x0000000000000000;
+  cpu.csr[satp]       =  0x0000000000000000;
+  cpu.csr[medeleg]    =  0x0000000000000000; 
+  cpu.csr[mideleg]    =  0x0000000000000000;
+  cpu.csr[sie]        =  0x0000000000000000; 
+  cpu.csr[mie]        =  0x0000000000000000; 
+  cpu.csr[pmpaddr0]   =  0x003fffffffffffff;
+  cpu.csr[pmpcfg0]    =  0x000000000000001f;
+  cpu.csr[sstatus]    =  0x0000000200000000; 
+  cpu.csr[menvcfg]    =  0x0000000000000000;
+  cpu.csr[marchid]    =  0x5;
+  // open mmu for error
 }
-
-
-
 
 void isa_reg_display(CPU_state *state, const char *msg) {
     const char *prefix = (msg != NULL) ? msg : "CPU";
-
     printf("\n--- Reg [%s] ---\n", prefix);
     for (int i = 0; i < GPR_NUM; i++) {
         printf("%-4s: 0x%016lx\n", reg_name(i), state->gpr[i]);
